@@ -1,1 +1,48 @@
+version: '3'
+
+include:
+  - /root/proxy.yaml
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    ports:
+       - "5000:5000"
+    environment:
+       - MYSQL_USER=web
+       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-p@ssw0rd}
+    depends_on:
+      - db
+    env_file:
+      - /root/.env
+    restart: on-failure
+    networks:
+      backend:
+         ipv4_address: 172.20.0.5
+
+  db:
+    image: mysql:${MYSQL_VERSION:-8}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-p@ssw0rd}
+      - MYSQL_DATABASE=web
+      - MYSQL_USER=web
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-p@ssw0rd}
+    ports:
+       - "3306:3306" 
+    restart: on-failure
+    networks:
+       backend:
+          ipv4_address: 172.20.0.10
+    env_file:
+       - /root/.env
+
+networks:
+  backend:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.20.0.0/24
+
 
