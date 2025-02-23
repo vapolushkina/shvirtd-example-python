@@ -1,2 +1,40 @@
 Подскажите, не могу понять почему контейнер root-web-1 не может подключиться к БД и я не могу подключиться
+NAME                   IMAGE          COMMAND                  SERVICE         CREATED          STATUS                                  PORTS
+
+root-db-1              mysql:8        "docker-entrypoint.s…"   db              12 seconds ago   Up 10 seconds                           3306/tcp, 33060/tcp
+
+root-ingress-proxy-1   nginx:1.21.1   "/docker-entrypoint.…"   ingress-proxy   12 seconds ago   Up 11 seconds                           
+
+root-reverse-proxy-1   haproxy:2.4    "docker-entrypoint.s…"   reverse-proxy   12 seconds ago   Up 10 seconds                           127.0.0.1:8080->8080/tcp
+
+root-web-1             root-web       "python /root/main.py"   web             12 seconds ago   Restarting (1) Less than a second ago   
+
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+
+  File "/root/main.py", line 14, in <module>
+
+    db = mysql.connector.connect(
+
+  File "/usr/local/lib/python3.8/site-packages/mysql/connector/pooling.py", line 322, in connect
+
+    return CMySQLConnection(*args, **kwargs)
+
+  File "/usr/local/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 151, in __init__
+
+    self.connect(**kwargs)
+
+  File "/usr/local/lib/python3.8/site-packages/mysql/connector/abstracts.py", line 1399, in connect
+
+    self._open_connection()
+
+  File "/usr/local/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 339, in _open_connection
+
+    raise get_mysql_exception(
+
+mysql.connector.errors.DatabaseError: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (99)
+
 
