@@ -1,4 +1,8 @@
-Подскажите, не могу понять почему контейнер root-web-1 не может подключиться к БД и я не могу подключиться
+Подскажите, не могу понять почему контейнер root-web-1 не может подключиться к БД и я не могу подключиться.
+Я переписала пароли в явнов виде в compose, но результат тот же
+
+
+
 NAME                   IMAGE          COMMAND                  SERVICE         CREATED          STATUS                                  PORTS
 
 root-db-1              mysql:8        "docker-entrypoint.s…"   db              12 seconds ago   Up 10 seconds                           3306/tcp, 33060/tcp
