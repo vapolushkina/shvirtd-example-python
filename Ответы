@@ -11,4 +11,76 @@ root-web-1             root-web       "python /root/main.py"   web             5
 
 root@VM1:~# curl -L http://127.0.0.1:8090
 
+TIME: 2025-03-02 15:49:14, IP: 127.0.0.1root@VM1:~# 
+
+
+mysql> show databases;
+
++--------------------+
+
+| Database           |
+
++--------------------+
+
+| information_schema |
+
+| mysql              |
+
+| performance_schema |
+
+| sys                |
+
+| web                |
+
++--------------------+
+
+5 rows in set (0.01 sec)
+
+
+
+mysql> use web;
+
+Reading table information for completion of table and column names
+
+You can turn off this feature to get a quicker startup with -A
+
+
+
+Database changed
+
+mysql> show tables;
+
++---------------+
+
+| Tables_in_web |
+
++---------------+
+
+| requests      |
+
++---------------+
+
+1 row in set (0.01 sec)
+
+
+
+mysql> SELECT * from requests LIMIT 10;
+
++----+---------------------+------------+
+
+| id | request_date        | request_ip |
+
++----+---------------------+------------+
+
+|  1 | 2025-03-02 15:49:14 | 127.0.0.1  |
+
++----+---------------------+------------+
+
+1 row in set (0.00 sec)
+
+
+
+
+
+
 
